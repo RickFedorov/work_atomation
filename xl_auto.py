@@ -1,17 +1,10 @@
 import pandas
-import chardet
+import tools
 import numpy
 
 fileName = r"./EU Sales Report.xls"
 
-# detect encoding
-detector = chardet.UniversalDetector()
-for line in open(fileName, 'rb'):
-    detector.feed(line)
-    if detector.done: break
-detector.close()
-
-df = pandas.read_csv(fileName, encoding=detector.result['encoding'], sep="\t")
+df = pandas.read_csv(fileName, encoding=tools.detect_encoding(fileName), sep="\t")
 print(next(df.iterrows())[1])
 
 new_row = {
