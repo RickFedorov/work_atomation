@@ -1,0 +1,22 @@
+issuer: Toner Print.cz, s.r.o.
+fields:
+  amount: CELKEM K ÚHRADĚ *(\d+\,\d+)
+  date: 'Datum vystavení: *(\d{2}.\d{2}.\d{4})'
+  invoice_number: DAŇOVÝ DOKLAD č. (\d+)
+  total: (Součet položek)\s+(-?\d*.\d+\,\d{2})\s+(-?\d*.\d+\,\d{2})\s+(-?\d*.\d+\,\d{2})
+  static_vat: CZ28349547
+tables:
+  - start: Základ v Kč\s+Sazba\s+DPH v Kč\s+Celkem s DPH v Kč
+    end: Převzal
+    body: (?P<base>-?\d*.\d+\,\d{2})\s+(?P<rate>\d+%)\s+(?P<vat_amount>-?\d*.\d+\,\d{2})\s+(?P<bruto>-?\d*.\d+\,\d{2})
+keywords:
+  - CZ28349547
+  - FAKTURA
+required_fields:
+  - invoice_number
+options:
+  date_formats:
+    - '%d %m %Y'
+  languages:
+    - cs
+  decimal_separator: ','
