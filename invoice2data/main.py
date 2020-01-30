@@ -75,7 +75,7 @@ def extract_data(invoicefile, templates=None, input_module=pdftotext):
      'currency': 'INR', 'desc': 'Invoice IBZY2087 from OYO'}
 
     """
-    logging.basicConfig(level=logging.DEBUG)
+    logging.basicConfig(level=logging.INFO)
 
     if templates is None:
         templates = read_templates()

@@ -1,0 +1,23 @@
+issuer: MannHummel
+fields:
+  foreign_base: 'Items total\s*(\d*\,*\d+\.*\d{2})'
+  foreign_vat: 'V\.A\.T\.\s*GST\s*20\.000\s*%\s\d*\,*\d+\.*\d{2}\s*(\d*\,*\d+\.*\d{2})'
+  foreign_bruto: 'Final Amount\s*(\d*\,*\d+\.*\d{2})'
+  local_vat: 'Output Tax\s* 2\.000\s*\%\s*GBP\s(\d*\,*\d+\.*\d{2})'
+  exchange_rate: ''
+  invoice_number: 'Invoice\s*(\d+)'
+tables:
+  - start: invoice date
+    end: Page
+    body: '(?P<date>\d{2}\.\d{2}\.\d{4})'
+keywords:
+  - HUMMEL
+  - Invoice
+required_fields:
+  - invoice_number
+options:
+  date_formats:
+    - '%d %m %Y'
+  languages:
+    - en
+  decimal_separator: '.'

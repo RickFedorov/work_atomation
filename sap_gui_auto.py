@@ -1,14 +1,16 @@
 import pywinauto
 from pywinauto.keyboard import send_keys
+from pywinauto.mouse import click
 import shelve
 import time
+import win32api
 
 d = shelve.open("test.shelve")
 app = pywinauto.application.Application().connect(path=r"C:\Program Files (x86)\SAP\FrontEnd\SAPgui\saplgpad.exe")
 dlg = None
 
 if "handle" in d:
-    if app.window(handle=d["handle"]).Exists(timeout=2):
+    if app.window(handle=d["handle"]).exists(timeout=2):
         dlg = app.window(handle=d["handle"])
     else:
         dlg = app.window(title_re=".*Easy Access*")
@@ -19,13 +21,24 @@ else:
 
 d.close()
 
-dlg.Edit.type_keys("/NVA02{ENTER}")
+dlg.Edit.type_keys("/NVA03{ENTER}")
 time.sleep(1)
 send_keys("60210197")
 menu = dlg.menu_select("Sales document->Issue Output To")
+time.sleep(1)
+#click(coords=(2015, 592))
 
-test = app.window(title_re="*Output*").wait('visible', timeout=5, retry_interval=1)
-test.Test.click()
+for location in output_locations:
+    print(location.left)
+
+    time.sleep(1)
+    #send_keys("^+{VK_F1}")
+
+
+
+# test = app.Outputoutput.print_control_identifiers()
+#test = app.Outputoutput.child_window(class_name="Afx:03860000:b").print_control_identifiers()
+
 
 # send_keys("+{VK_F5}")
 

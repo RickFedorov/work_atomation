@@ -1,0 +1,23 @@
+issuer: Nidec Industrial Automation UK Limited
+fields:
+  foreign_base: 'Total Amount (incl VAT) *(\d+\.\d+)'
+  foreign_vat: 'VAT Amount (\d*\,*\d+\.*\d{2})'
+  foreign_bruto: ''
+  exchange_rate: 'Exchange Rate EUR/GBP = ([0-9.]*)'
+  date: 'Invoice Date: *(\d{2}/\d{2}/\d{4})'
+  invoice_number: 'Invoice Number: (\d+)'
+tables:
+  - start: Total Invoice Amount
+    end: 'Due Date:'
+    body: '\s?(?P<local_base>\d*\,*\d+\.*\d{2})\s?(?P<local_vat>\d*\,*\d+\.*\d{2})\s?(?P<local_bruto>\d*\,*\d+\.*\d{2}?)'
+keywords:
+  - Nidec
+  - Invoice
+required_fields:
+  - invoice_number
+options:
+  date_formats:
+    - '%d %m %Y'
+  languages:
+    - en
+  decimal_separator: '.'

@@ -1,8 +1,6 @@
 import os
 from pathlib import Path
 
-
-
 poppler_path = Path(__file__).parent / 'poppler' / 'bin'
 work_dir_path = Path(__file__).parent / 'work_dir'
 
@@ -21,6 +19,7 @@ def pdf2text(file_name, *args):
     print(cmd)
     print(os.popen(cmd))
     return new_file
+
 
 file_name = "invoice-test.pdf"
 pdf2text(file_name, "-layout")
